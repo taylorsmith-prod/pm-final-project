@@ -1,11 +1,7 @@
-# Strategic Discovery Map
-
-> **Module 1 · Lab 1.** Repo file `01-product-thinking/strategic-map.md` — part of your submission.
-> Do the lab in the **Module 1 · Exercise 1 Guide** (linked from the Module 1 deck), then click **⬇ Download .md** — it saves as this exact file. Commit it here.
-> It's the discovery groundwork behind your `problem-hook.md`.
+# Strategic Discovery Map (Module 1)
 
 ## Responses
-
-- **Feature with no strategic answer (why is this a 12-week priority?):** _(not filled in)_
-- **Feature that looks "correct" but has zero strategic weight:** _(not filled in)_
-- **V3 vs your Step 1 baseline — what changed, and was it your PM knowledge that forced usefulness?:** _(not filled in)_
+- **Write one feature from the map that, if an engineer asked “why is this a priority for our 12-week roadmap?”, you honestly could not give a strategic answer for.:** Beverage Type because that is potentially beyond the scope of the initial build and takes the app in a hydration direction rather than water tracking.
+- **Write one feature that looks “correct” for the app but has zero strategic weight, you have no idea if it helps the company make money or whether a single user actually asked for it.:** Streaks and badges can wait until other features of the product are proven.
+- **Compare V3 to your Step 1 baseline. What changed, and is the output objectively better, did the AI get smarter, or did your added PM knowledge (JTBD, effort/impact, retention) force it to be useful?:** It did take it to a hydration app rather than simple water-tracking which is interesting but adding product management knowledge significantly strengthened the prompt's context. Because AI can't inherently read the direction in our heads, we have to explicitly provide that context to get a meaningful output.
+- **Key takeaway: how does this prove the PM’s role is to think while the AI’s role is to execute?:** I needed to observe and validate which components to prioritize for the app's initial scope. While many features sound valuable, it is critical to make a deliberate judgment call on what actually belongs in the first build.

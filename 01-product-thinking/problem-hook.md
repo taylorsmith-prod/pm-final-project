@@ -1,53 +1,21 @@
-# Problem Hook & Value Proposition: [StreamLine / RouteLogic / your initiative]
+# Problem Hook & Value Proposition (Module 1)
 
-> **Module 1 · ★ Deliverable 1.** Repo file `01-product-thinking/problem-hook.md` — part of your submission.
-> Do the lab in the **Module 1 · Exercise 2 Guide** (linked from the Module 1 deck), then click **⬇ Download .md** — it saves as this exact file. Commit it here.
-> It becomes the **Problem, Value & Hypothesis** slide of your Module 6 final deck. (Your Module 1 · Exercise 1 discovery map lands in `strategic-map.md`.)
+## Responses
+- **Chosen path, which scenario are you committing to? (StreamLine or RouteLogic, or your own):** RouteLogic
+- **Strategic crisis, based on the brief, if the company does nothing for 12 months, what happens to its market position?:** If RouteLogic does nothing for 12 months, it likely loses its position as the default operating system for regional fleets and settles into a shrinking, defensive niche.
+- **Moment of misery, what is the user likely doing outside the product (Google, spreadsheets, a competitor) because your tool isn’t serving them?:** Spreadsheets: A personal “today’s board” with drivers, stops, and time windows, built because it’s faster to drag a row than to navigate RouteLogic’s workflow. This is the strongest signal, since a spreadsheet replaces the product’s core job.
 
-## 1. Chosen scenario
+Google Maps or a navigation app: Checking a quick route, ETA, or traffic. Every time they do, the platform’s routing has failed the “answer in seconds” test.
 
-**Path:** _StreamLine Spotlight (B2C) · RouteLogic Velocity (B2B) · my own initiative_
+Phone, text, and group chats: Calling or texting drivers directly because messaging inside the product is slower or buried, then logging the change later (or never).
 
-_One line on why you picked it._
+Memory and tribal knowledge: Experienced dispatchers know which screens to avoid and which five features actually matter, and they train new hires on the workarounds.
 
-## 2. The strategic crisis
+Workarounds map the essential jobs. Whatever users rebuild outside the product (assign, re-sequence, notify, confirm) is the true core. Everything they never leave the product for is a candidate for the “legacy noise” or “enterprise layer” bucket.
+- **Problem hook, summarize the business risk and user pain into one urgent sentence.:** RouteLogic’s dispatchers are abandoning the product for spreadsheets and phone calls at the exact moment speed matters most, and unless we restore frontline simplicity within 12 months, our largest enterprise account and our position as the fleet operating system of choice will go to a leaner competitor.
+- **Value proposition, based on the proposed initiative (Spotlight or Velocity), what is the new value and why is it urgent to launch now?:** RouteLogic Velocity gives dispatchers and fleet coordinators the fastest way to handle a live disruption, with everything else out of their way, while keeping the full enterprise power of RouteLogic one layer away for the teams that need it.
 
-_The big-picture business risk. If the company does nothing for 12 months, what happens to its market position?_
-
-> If we do nothing for 12 months, the company will…
-
-## 3. The moment of misery
-
-_The specific point where the product fails the user, forcing a manual workaround (Google, spreadsheets, group texts, a competitor)._
-
-> The user is currently forced to…
-
-## 4. Problem hook
-
-_One urgent sentence fusing the business risk and the user pain, your pitch for why this is the most important thing to work on right now._
-
-> We must solve [business risk] by addressing [user pain]…
-
-## 5. Value proposition
-
-_Who it's for, the new value, and why it's urgent to launch now._
-
-> For **[who]**, we will **[value]** because **[urgent why]**.
-
-## 6. Cold-read self-review
-
-_Read your hook back as a skeptical stakeholder. If you don't feel the urgency, that's your data._
-
-| Question | Your answer |
-|---|---|
-| Is the business risk high-stakes enough to justify a new initiative? | _____ |
-| Is the moment of misery systemic, or just an edge case? | _____ |
-| Does the value proposition actually remove the obstacle? | _____ |
-
-## 7. Finalized hypothesis _(complete in Module 3)_
-
-> Based on [qual + quant evidence], I believe that [solving X] for [persona] will result in [outcome], as measured by a [X%] change in [success metric]. I will protect [guardrail metric] and make a go/no-go decision after [decision window].
-
-## Link to full artifact
-
-_[link to your Problem Hook Builder export]_
+## Cold-read your own hook
+- **Is the business risk high enough to justify a new initiative, a high-stakes threat, or a minor inconvenience?:** The cause is structural: years of saying yes to every request. A few UI tweaks or a single feature release won’t reverse that. It takes a deliberate decision about what is core, what is enterprise-only, and what is legacy noise, plus the discipline to keep it that way. That is initiative-sized work with an owner, a mandate, and success metrics.
+- **Is the moment of misery a systemic problem or just an edge case?:** This isn’t an edge case: the moment of misery recurs every shift, for the majority of our users, and it traces back to how the whole product was built.
+- **Does the value proposition actually remove the obstacle you identified, or is it a generic feature?:** When a driver breaks down mid-shift, a RouteLogic dispatcher can re-sequence the route, update the ETA, and notify the driver and customer in one flow, in less time than it takes to open a spreadsheet. Enterprise controls stay one search or one role away, never in the dispatcher’s way.
