@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RouteLogic Velocity: Diego's Future-State Journey</title>
+<style>
+  :root {
+    --ink: #14232e;
+    --muted: #55656f;
+    --paper: #f4f6f8;
+    --card: #ffffff;
+    --line: #c9d3da;
+    --driver: #0e7c7b;
+    --driver-bg: #e3f3f2;
+    --dispatch: #4a3fa0;
+    --dispatch-bg: #ebe9f8;
+    --pain: #8a4b00;
+    --pain-bg: #fcefd9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 32px 24px 40px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  main { max-width: 1120px; margin: 0 auto; }
+  h1 { font-size: 26px; line-height: 1.2; margin: 0 0 6px; font-weight: 700; }
+  .sub { margin: 0 0 4px; color: var(--muted); max-width: 70ch; }
+  .persona { margin: 0 0 28px; color: var(--muted); font-size: 14px; max-width: 80ch; }
+  .legend { display: flex; gap: 20px; font-size: 13px; color: var(--muted); margin: 0 0 14px; }
+  .legend span::before {
+    content: ""; display: inline-block; width: 11px; height: 11px;
+    border-radius: 2px; margin-right: 7px; vertical-align: -1px;
+  }
+  .legend .l-driver::before { background: var(--driver); }
+  .legend .l-dispatch::before { background: var(--dispatch); }
+
+  .timeline {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+    position: relative;
+  }
+  .timeline::before {
+    content: ""; position: absolute; left: 6%; right: 6%; top: 19px;
+    height: 3px; background: var(--line);
+  }
+  .stage { position: relative; padding-top: 0; }
+  .marker {
+    position: relative; z-index: 1;
+    width: 40px; height: 40px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 17px; color: #fff;
+    margin: 0 auto 14px;
+    border: 4px solid var(--paper);
+  }
+  .driver .marker { background: var(--driver); }
+  .dispatch .marker { background: var(--dispatch); }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--driver);
+    border-radius: 6px;
+    padding: 16px 16px 14px;
+    height: calc(100% - 54px);
+  }
+  .dispatch .card { border-top-color: var(--dispatch); }
+  .card h2 { font-size: 17px; margin: 0 0 12px; line-height: 1.25; }
+  .field { margin: 0 0 12px; }
+  .field:last-child { margin-bottom: 0; }
+  .field dt { font-size: 12.5px; font-weight: 700; color: var(--muted); margin: 0 0 2px; }
+  .field dd { margin: 0; font-size: 14px; }
+  .field.pain { background: var(--pain-bg); border-radius: 4px; padding: 8px 10px; }
+  .field.pain dt { color: var(--pain); }
+
+  .advantages { margin-top: 30px; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; }
+  .advantages h2 { font-size: 17px; margin: 0 0 10px; }
+  .advantages ol { margin: 0; padding-left: 22px; font-size: 14.5px; }
+  .advantages li { margin-bottom: 6px; }
+  .advantages li:last-child { margin-bottom: 0; }
+  .note { margin-top: 16px; font-size: 12.5px; color: var(--muted); max-width: 100ch; }
+
+  @media (max-width: 860px) {
+    .timeline { grid-template-columns: 1fr; gap: 22px; }
+    .timeline::before { display: none; }
+    .marker { margin: 0 0 10px; }
+    .card { height: auto; }
+  }
+  @media print {
+    @page { size: landscape; margin: 10mm; }
+    body { padding: 0; background: #fff; font-size: 12px; }
+    h1 { font-size: 20px; }
+    .card h2 { font-size: 14px; margin-bottom: 8px; }
+    .field dd { font-size: 11.5px; }
+    .field { margin-bottom: 7px; }
+    .persona { margin-bottom: 14px; }
+    .advantages { margin-top: 14px; padding: 12px 14px; }
+    .advantages ol { font-size: 11.5px; }
+    .note { display: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>RouteLogic Velocity: Diego's future-state journey</h1>
+  <p class="sub">Reclaim operational simplicity by stripping away legacy noise, so the tool is the fastest way to do everyday work.</p>
+  <p class="persona">Persona: Diego, delivery driver (3 years). He wants to confirm each delivery quickly and move to the next stop without the app slowing him down.</p>
+
+  <p class="legend"><span class="l-driver">Driver moment</span><span class="l-dispatch">Dispatcher-linked moment</span></p>
+
+  <ol class="timeline">
+    <li class="stage driver">
+      <div class="marker">1</div>
+      <div class="card">
+        <h2>Arrive at the stop</h2>
+        <dl>
+          <div class="field"><dt>User action</dt><dd>Opens Velocity home, sees current stop and Delivered button -&gt; zero menu hunting.</dd></div>
+          <div class="field"><dt>Internal state</dt><dd>Glances at screen one-handed -&gt; feels calm and in control.</dd></div>
+          <div class="field pain"><dt>Pain point addressed</dt><dd>Core actions on home screen -&gt; fixes buried Start Route and Mark Delivered (BUG-2079).</dd></div>
+        </dl>
+      </div>
+    </li>
+    <li class="stage driver">
+      <div class="marker">2</div>
+      <div class="card">
+        <h2>Complete in one tap</h2>
+        <dl>
+          <div class="field"><dt>User action</dt><dd>Taps Delivered once -&gt; stop closes in one step, hands stay free.</dd></div>
+          <div class="field"><dt>Internal state</dt><dd>Finishes with package still in hand -&gt; feels the app keeps pace.</dd></div>
+          <div class="field pain"><dt>Pain point addressed</dt><dd>One tap replaces three screens -&gt; removes the reason to text (BUG-2055).</dd></div>
+        </dl>
+      </div>
+    </li>
+    <li class="stage dispatch">
+      <div class="marker">3</div>
+      <div class="card">
+        <h2>Sync without texting</h2>
+        <dl>
+          <div class="field"><dt>User action</dt><dd>Moves to next stop -&gt; status reaches dispatcher board automatically, no text needed.</dd></div>
+          <div class="field"><dt>Internal state</dt><dd>Stops double-checking the app -&gt; feels finished, no backup message needed.</dd></div>
+          <div class="field pain"><dt>Pain point addressed</dt><dd>Photo retry queue, live status -&gt; fixes silent failures and stale boards (BUG-2061, BUG-2072).</dd></div>
+        </dl>
+      </div>
+    </li>
+    <li class="stage dispatch">
+      <div class="marker">4</div>
+      <div class="card">
+        <h2>Adapt to disruption</h2>
+        <dl>
+          <div class="field"><dt>User action</dt><dd>Receives pushed reroute from dispatcher -&gt; acts within seconds, avoids wrong turns.</dd></div>
+          <div class="field"><dt>Internal state</dt><dd>Trusts the route is current -&gt; feels backed by dispatch, not alone.</dd></div>
+          <div class="field pain"><dt>Pain point addressed</dt><dd>Push on route change -&gt; replaces the 8-15 minute lag (BUG-2044).</dd></div>
+        </dl>
+      </div>
+    </li>
+  </ol>
+
+  <section class="advantages">
+    <h2>Competitive advantages over the manual workaround</h2>
+    <ol>
+      <li><strong>Structured record:</strong> One tap creates a timestamped stop event -&gt; auditable proof a text message can't provide.</li>
+      <li><strong>Automatic sync:</strong> Status flows to the dispatcher board -&gt; no manual reconciliation of messages.</li>
+      <li><strong>Reporting-ready data:</strong> Every completed stop lands in the system of record -&gt; strengthens the admin reporting enterprise buyers value.</li>
+    </ol>
+  </section>
+
+  <p class="note">Internal state entries are interpretations of UXR-01 and should be validated in follow-up research. The photo retry queue (Stage 3) and push notification (Stage 4) go beyond the stated Strategy and Value Prop; confirm scope.</p>
+</main>
+</body>
+</html>
