@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RouteLogic Velocity Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF2F5; --surface:#FFFFFF; --ink:#13233A; --muted:#5A6B80; --line:#D3DCE5; --rail:#13233A;
+  --qw:#0E8A6B; --qw-bg:#DDF3EC;
+  --mp:#3B54C7; --mp-bg:#E3E8FB;
+  --fi:#5E6C7E; --fi-bg:#E6EAEF;
+  --ts:#C4471F; --ts-bg:#FBE5DC;
+  --focus:#3B54C7;
+  --head:"Archivo","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1A2A; --surface:#16263B; --ink:#E8EEF5; --muted:#9BAABB; --line:#2B3D55; --rail:#E8EEF5;
+    --qw:#4CD1A8; --qw-bg:#12362F;
+    --mp:#8DA0FF; --mp-bg:#202C57;
+    --fi:#A3AFBF; --fi-bg:#25354A;
+    --ts:#FF8A5E; --ts-bg:#4A2619;
+    --focus:#8DA0FF;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1A2A; --surface:#16263B; --ink:#E8EEF5; --muted:#9BAABB; --line:#2B3D55; --rail:#E8EEF5;
+  --qw:#4CD1A8; --qw-bg:#12362F; --mp:#8DA0FF; --mp-bg:#202C57; --fi:#A3AFBF; --fi-bg:#25354A; --ts:#FF8A5E; --ts-bg:#4A2619; --focus:#8DA0FF;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.55 var(--body);padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+.wrap{max-width:1180px;margin:0 auto;padding:36px 24px 64px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:28px}
+h1{font:800 clamp(30px,5vw,48px)/1.02 var(--head);letter-spacing:-.02em;margin:0}
+h1 span{display:block;font:500 15px/1.4 var(--body);color:var(--muted);letter-spacing:0;margin-top:10px}
+.team{font-size:13px;color:var(--muted);text-align:right}
+.team b{display:block;color:var(--ink);font:700 13px var(--head)}
+.theme{margin-top:8px;background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:5px 12px;font:500 12px var(--body);cursor:pointer}
+.theme:hover{border-color:var(--ink)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:30px}
+.filters p{margin:0 6px 0 0;color:var(--muted);font-size:13px}
+.chip{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 14px;font:500 13px var(--body);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--c,var(--ink));display:inline-block}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip[aria-pressed="true"] i{box-shadow:0 0 0 2px var(--bg)}
+
+/* route rail */
+.lanes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;position:relative}
+.lane{position:relative;padding-top:46px}
+.lane::before{content:"";position:absolute;top:13px;left:-22px;right:0;height:4px;background:var(--rail);border-radius:2px}
+.lane:first-child::before{left:13px}
+.lane:last-child::before{right:auto;width:calc(100% - 22px);background:repeating-linear-gradient(90deg,var(--rail) 0 10px,transparent 10px 18px)}
+.stop{position:absolute;top:2px;left:0;width:26px;height:26px;border-radius:50%;background:var(--bg);border:4px solid var(--rail)}
+.lane.now .stop{background:var(--rail)}
+.lane h2{font:800 26px/1 var(--head);margin:0;letter-spacing:-.01em}
+.lane .sub{color:var(--muted);font-size:13px;margin:6px 0 16px}
+.count{font:500 12px var(--body);color:var(--muted)}
+.stack{display:flex;flex-direction:column;gap:14px}
+
+.card{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--q);border-radius:6px;padding:14px 16px 15px;transition:opacity .2s,transform .2s,box-shadow .2s}
+.card.qw{--q:var(--qw)} .card.mp{--q:var(--mp)} .card.fi{--q:var(--fi)} .card.ts{--q:var(--ts)}
+.card.dim{opacity:.22}
+.card.active{box-shadow:0 0 0 2px var(--q)}
+.card .top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.id{font:700 12px var(--head);color:var(--muted)}
+.badge{font:700 12px var(--head);padding:3px 10px;border-radius:999px;background:var(--b);color:var(--q);border:1px solid var(--q)}
+.qw .badge{--b:var(--qw-bg)} .mp .badge{--b:var(--mp-bg)} .fi .badge{--b:var(--fi-bg)} .ts .badge{--b:var(--ts-bg)}
+.card h3{font:700 17px/1.25 var(--head);margin:0 0 8px}
+.card p{margin:0;font-size:14px;color:var(--muted)}
+.card .score{display:flex;gap:14px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.card .score b{color:var(--ink);font-family:var(--head)}
+.card[tabindex]{cursor:pointer}
+.card.collapsed p{display:none}
+.card.collapsed .score{margin-top:4px}
+.hint{font-size:12px;color:var(--muted);margin:-14px 0 24px}
+
+/* cut list */
+.cut{margin-top:56px;border-top:3px solid var(--ts);padding-top:22px}
+.cut h2{font:800 26px/1 var(--head);margin:0 0 4px}
+.cut > p{margin:0 0 18px;color:var(--muted);font-size:13px}
+.cutgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.cutgrid .card{border-left-style:dashed;background:transparent}
+.cutgrid .card h3{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--ts)}
+.empty{display:none;color:var(--muted);font-size:13px;padding:10px 0}
+
+@media (max-width:860px){
+  .lanes{grid-template-columns:1fr;gap:36px}
+  .lane::before,.lane:first-child::before,.lane:last-child::before{left:13px;right:auto;width:calc(100% - 13px)}
+  .team{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>RouteLogic Velocity<span>Roadmap for the Fleet Coordinator: cut the 31 minutes a day lost to manual workarounds</span></h1>
+    <div class="team"><b>Team</b>2 engineers, 1 designer, 1 CS lead<br><button class="theme" id="theme" type="button">Switch theme</button></div>
+  </header>
+
+  <div class="filters" role="group" aria-label="Filter by quadrant">
+    <p>Show:</p>
+    <button class="chip" data-q="qw" style="--c:var(--qw)" aria-pressed="false"><i></i>Quick Win</button>
+    <button class="chip" data-q="mp" style="--c:var(--mp)" aria-pressed="false"><i></i>Major Project</button>
+    <button class="chip" data-q="fi" style="--c:var(--fi)" aria-pressed="false"><i></i>Fill-In</button>
+    <button class="chip" data-q="ts" style="--c:var(--ts)" aria-pressed="false"><i></i>Time Sinker</button>
+    <button class="chip" id="toggle" type="button" aria-pressed="false" style="margin-left:auto">Hide rationales</button>
+  </div>
+
+  <div class="lanes" id="lanes"></div>
+
+  <section class="cut" aria-labelledby="cut-h">
+    <h2 id="cut-h">Cut List</h2>
+    <p>Out of scope for Velocity. These do not reduce the coordinator’s daily time lost.</p>
+    <div class="cutgrid" id="cut"></div>
+  </section>
+</div>
+
+<script>
+var Q={qw:"Quick Win",mp:"Major Project",fi:"Fill-In",ts:"Time Sinker"};
+var LANES=[
+ {k:"now",t:"NOW",s:"Pilot: 4 weeks, 3 accounts",items:[
+  {id:"B1",n:"One-Click Compliance Checklist",q:"qw",v:5,e:3,r:"It attacks the Moment of Misery directly. The 14.6-min step is about half the 31-min baseline, so even a 15% cut gets you 2+ min toward the 9-min target."},
+  {id:"B6",n:"Driver Alert Notifications",q:"ts",v:2,e:4,r:"It serves the driver rather than the coordinator, and push infrastructure is heavy. A compliance-flag alert might help later, but not in this pilot."}
+ ]},
+ {k:"next",t:"NEXT",s:"GA release: weeks 5–8",items:[
+  {id:"B2",n:"Smart Daily Report Auto-Fill",q:"fi",v:3,e:3,r:"It’s real friction, but not the Moment of Misery. It sits directly on the 4.5 CSAT guardrail, and an AI auto-fill error is the most likely way to breach 4.0."},
+  {id:"B3",n:"Shift Handoff Wizard",q:"qw",v:4,e:3,r:"A claimed 6.8 min/day is about 75% of the 9 minutes you need, and it targets a manual workaround. It doesn’t touch Manager Reporting, so the CSAT guardrail is safe."},
+  {id:"B4",n:"Mobile-First Coordinator Dashboard",q:"mp",v:4,e:5,r:"It’s the right long-term shape, but it’s a rebuild. Two engineers can’t ship and measure it in a 4-week pilot."}
+ ]},
+ {k:"later",t:"LATER",s:"Backlog",items:[
+  {id:"B5",n:"Step Progress Indicator",q:"fi",v:2,e:1,r:"Cheap, but it shows where you are without saving a single minute. It’s also added UI where Velocity is meant to strip noise."},
+  {id:"B9",n:"Compliance Audit Trail Export",q:"fi",v:2,e:2,r:"It serves after-the-fact audits, not the daily minutes lost, so it doesn’t move the primary metric."},
+  {id:"B10",n:"In-App Coordinator Training",q:"fi",v:2,e:2,r:"Training doesn’t remove a workaround. Your CS lead can run walkthroughs manually for 3 accounts."}
+ ]}
+];
+var CUT=[
+ {id:"B7",n:"Contextual AI ETA Display",q:"fi",v:1,e:2,r:"11% adoption says coordinators don’t want it. Surfacing it more widely adds noise and is unrelated to compliance or handoff friction."},
+ {id:"B8",n:"Fleet Analytics Manager View",q:"ts",v:1,e:5,r:"It’s a sales-demo feature. It does nothing for the coordinator’s daily time loss and costs the most to build."}
+];
+
+function card(f){
+  var el=document.createElement("article");
+  el.className="card "+f.q; el.dataset.q=f.q; el.tabIndex=0;
+  el.setAttribute("aria-label",f.id+" "+f.n+", "+Q[f.q]);
+  el.innerHTML='<div class="top"><span class="id">'+f.id+'</span><span class="badge">'+Q[f.q]+'</span></div>'+
+    '<h3></h3><p></p><div class="score"><span>Value <b>'+f.v+'/5</b></span><span>Effort <b>'+f.e+'/5</b></span></div>';
+  el.querySelector("h3").textContent=f.n;
+  el.querySelector("p").textContent=f.r;
+  return el;
+}
+var lanes=document.getElementById("lanes");
+LANES.forEach(function(L){
+  var s=document.createElement("section"); s.className="lane "+L.k; s.setAttribute("aria-labelledby","h-"+L.k);
+  s.innerHTML='<span class="stop" aria-hidden="true"></span><h2 id="h-'+L.k+'">'+L.t+'</h2><div class="sub">'+L.s+'</div><div class="stack"></div><div class="empty">No features match this filter.</div>';
+  var st=s.querySelector(".stack"); L.items.forEach(function(f){st.appendChild(card(f));});
+  lanes.appendChild(s);
+});
+var cutEl=document.getElementById("cut"); CUT.forEach(function(f){cutEl.appendChild(card(f));});
+
+var cards=[].slice.call(document.querySelectorAll(".card"));
+var chips=[].slice.call(document.querySelectorAll(".chip[data-q]"));
+function applyFilter(){
+  var on=chips.filter(function(c){return c.getAttribute("aria-pressed")==="true";}).map(function(c){return c.dataset.q;});
+  cards.forEach(function(c){c.classList.toggle("dim",on.length>0&&on.indexOf(c.dataset.q)<0);});
+}
+chips.forEach(function(c){c.addEventListener("click",function(){
+  c.setAttribute("aria-pressed",c.getAttribute("aria-pressed")==="true"?"false":"true"); applyFilter();
+});});
+var tg=document.getElementById("toggle");
+tg.addEventListener("click",function(){
+  var on=tg.getAttribute("aria-pressed")!=="true";
+  tg.setAttribute("aria-pressed",String(on)); tg.textContent=on?"Show rationales":"Hide rationales";
+  cards.forEach(function(c){c.classList.toggle("collapsed",on);});
+});
+cards.forEach(function(c){
+  function flip(){c.classList.toggle("collapsed");}
+  c.addEventListener("click",flip);
+  c.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();flip();}});
+});
+document.getElementById("theme").addEventListener("click",function(){
+  var r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;
+  r.dataset.theme=dark?"light":"dark";
+});
+</script>
+</body>
+</html>
